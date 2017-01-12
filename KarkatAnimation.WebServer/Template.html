@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Karkat Animation Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        (function updatePicture() {
+            $.getJSON('http://localhost:8734/karkat/get', function (response) {
+                document.getElementById("picture").src = response.ImagePath;
+                console.log(response.ImagePath);
+                setTimeout(updatePicture, 500);
+            });
+        }());
+    </script>
+</head>
+<body>
+    <img id="picture" src=""/>
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿<Window x:Class="KarkatAnimation.OBS.Windows.ImagesSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:KarkatAnimation.OBS.Windows"
+        xmlns:talex="http://schemas.talex-soft.com/2010/xaml/presentation"
+        mc:Ignorable="d" Height="240" Width="308"
+        Loaded="AddImages_Load">
+    <Grid Background="#BBBBBB">
+        <StackPanel HorizontalAlignment="Left" Height="269" VerticalAlignment="Top" Width="292">
+            <Label Content="Image Settings" HorizontalAlignment="Center"/>
+            <ComboBox x:Name="ImageList" Height="25" SelectionChanged="ImageList_SelectedIndexChanged"/>
+            <Grid Height="25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="AddImageButton" Grid.Column="0" Content="Add" Click="AddImageButton_Click"/>
+                <Button x:Name="DeleteImageButton" Grid.Column="1" Content="Delete" Click="DeleteImageButton_Click"/>
+            </Grid>
+            <GroupBox Header="Info" Height="125">
+                <Grid Height="100">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Voice Type" HorizontalAlignment="Center"/>
+                    <ComboBox x:Name="VolumeTypeList" Grid.Column="1" Grid.Row="0" SelectionChanged="VolumeTypeList_SelectedIndexChanged"/>
+                    <Label Grid.Column="0" Grid.Row="1" Content="Order" HorizontalAlignment="Center"/>
+                    <talex:NumericUpDown x:Name="Order" Grid.Column="1" Grid.Row="1" Width="Auto" Height="25"/>
+                    <Label Grid.Column="0" Grid.Row="2" Content="Image Path" HorizontalAlignment="Center"/>
+                    <TextBox x:Name="ImagePathBox" Grid.Column="1" Grid.Row="2"/>
+                    <Button x:Name="SaveImageInfoButton" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Content="Save" Click="SaveButton_Click"/>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</Window>

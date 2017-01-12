@@ -1,0 +1,63 @@
+﻿<Window x:Class="KarkatAnimation.OBS.Windows.SettingsControl"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d" Width="330" Height="325">
+    <Grid Background="#BBBBBB">
+        <StackPanel Width="310" Height="283">
+            <Label Content="Input Device" HorizontalAlignment="Center"/>
+            <ComboBox x:Name="ListOfMicrophones" Height="25" SelectionChanged="ListOfMicrophones_SelectionChanged"/>
+            <Label Content="Volume Settings" HorizontalAlignment="Center"/>
+            <Grid Height="78">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="26"/>
+                    <RowDefinition Height="26"/>
+                    <RowDefinition Height="26"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Content="Silence"/>
+                <Slider x:Name="SilenceSlider" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="Auto" Maximum="100" ValueChanged="Slider_ValueChanged"/>
+                <Label x:Name="SilenceSliderLabel" Grid.Column="2" Grid.Row="0" Content="0" HorizontalAlignment="Center"/>
+                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Content="Speaking"/>
+                <Slider x:Name="SpeakingSlider" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="Auto" Maximum="100" ValueChanged="Slider_ValueChanged"/>
+                <Label x:Name="SpeakingSliderLabel" Grid.Column="2" Grid.Row="1" Content="0" HorizontalAlignment="Center"/>
+                <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" Content="Shouting"/>
+                <Slider x:Name="ShoutingSlider" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="Auto" Maximum="100" ValueChanged="Slider_ValueChanged"/>
+                <Label x:Name="ShoutingSliderLabel" Grid.Column="2" Grid.Row="2" Content="0" HorizontalAlignment="Center"/>
+            </Grid>
+            <Label Content="Peak Settings" HorizontalAlignment="Center"/>
+            <Grid Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="8*" />
+                    <ColumnDefinition Width="12*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Content="Update Time (ms)"/>
+                <Slider x:Name="UpdateTimeSlider" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="Auto" Maximum="2000" ValueChanged="Slider_ValueChanged" LargeChange="100" SmallChange="100"/>
+                <Label x:Name="UpdateTimeSliderLabel" Grid.Column="2" Grid.Row="0" Content="0" HorizontalAlignment="Center"/>
+                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Content="Peak Dlta (%)"/>
+                <Slider x:Name="PeakDeltaSlider" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="Auto" Maximum="100" ValueChanged="Slider_ValueChanged"/>
+                <Label x:Name="PeakDeltaSliderLabel" Grid.Column="2" Grid.Row="1" Content="0" HorizontalAlignment="Center"/>
+            </Grid>
+            <Button Content="Image Settings" Height="25" Width="Auto" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Click="ImageSettingsButton_Click"/>
+            <Grid Height="25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Grid.Row="0" Content="Save" Width="Auto" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Click="SaveButton_Click"/>
+                <Button Grid.Column="1" Grid.Row="0" Content="Cancel" Width="Auto" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Click="Button_Click"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>
