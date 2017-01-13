@@ -14,6 +14,4 @@ Program reads microphone peak volume and output image based on settings.
 ### OBS settings
 6. Add scene and source "Karkat Animation Source"
 7. Adjust setings for yourself, add some images
-8. Add source "CLR Browser"
-9. Forward CLR Browsers to "http://localhost:8734/karkat"
-10. Run stream
+8. Run stream
