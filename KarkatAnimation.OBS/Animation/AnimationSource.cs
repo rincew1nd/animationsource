@@ -10,10 +10,24 @@ using KarkatAnimation.Settings;
 
 namespace KarkatAnimation.OBS.Animation
 {
+    /// <summary>
+    /// Animation source for OBS
+    /// </summary>
     class AnimationSource : AbstractImageSource
     {
+        /// <summary>
+        /// Lock for drawing\loading\updating texture
+        /// </summary>
         private readonly object _textureLock = new object();
+
+        /// <summary>
+        /// Manager for calculating animation state based on microphone volume
+        /// </summary>
         private readonly AnimationManager _animationManager;
+
+        /// <summary>
+        /// Animation frames store
+        /// </summary>
         private Dictionary<VolumeType, List<AnimationImage>> _images;
 
         public AnimationSource(AnimationManager animationManager)
@@ -21,6 +35,10 @@ namespace KarkatAnimation.OBS.Animation
             _animationManager = animationManager;
         }
 
+        /// <summary>
+        /// Method called on animation source activation
+        /// Loading textures and start animation manager
+        /// </summary>
         public override void BeginScene()
         {
             base.BeginScene();
@@ -33,12 +51,19 @@ namespace KarkatAnimation.OBS.Animation
             }
         }
 
+        /// <summary>
+        /// Method called on animation source deactivation
+        /// Stop animation manager
+        /// </summary>
         public override void EndScene()
         {
             base.EndScene();
             _animationManager.StopMonitoring();
         }
 
+        /// <summary>
+        /// Loading texture for every animation frames
+        /// </summary>
         public void UpdateTextures()
         {
             foreach (var imageKeyValue in _images)
@@ -46,6 +71,11 @@ namespace KarkatAnimation.OBS.Animation
                     animationImage.Texture = LoadTexture(animationImage.Path);
         }
 
+        /// <summary>
+        /// Load texture for animation from AnimationImage.Path
+        /// </summary>
+        /// <param name="imageFile"></param>
+        /// <returns></returns>
         private Texture LoadTexture(string imageFile)
         {
             Texture texture = null;
@@ -71,6 +101,13 @@ namespace KarkatAnimation.OBS.Animation
             return texture;
         }
 
+        /// <summary>
+        /// Render texture to OBS stream
+        /// </summary>
+        /// <param name="x">X position</param>
+        /// <param name="y">Y position</param>
+        /// <param name="width">Animation width</param>
+        /// <param name="height">Animation height</param>
         public override void Render(float x, float y, float width, float height)
         {
             lock (_textureLock)
@@ -81,6 +118,9 @@ namespace KarkatAnimation.OBS.Animation
             }
         }
 
+        /// <summary>
+        /// IDK...
+        /// </summary>
         public override void UpdateSettings()
         {
             return;

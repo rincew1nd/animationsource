@@ -2,6 +2,9 @@
 
 namespace KarkatAnimation.Settings
 {
+    /// <summary>
+    /// Animation type enum
+    /// </summary>
     public enum VolumeType
     {
         [DefaultValue("Silence")]

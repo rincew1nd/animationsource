@@ -45,7 +45,7 @@ namespace KarkatAnimation.OBS.Windows
             SpeakingSlider.Value = _settings.Speaking;
             ShoutingSlider.Value = _settings.Shouting;
             UpdateTimeSlider.Value = _settings.UpdateTime;
-            PeakDeltaSlider.Value = (double)_settings.PeakDelta;
+            PeakDeltaSlider.Value = (double)_settings.SampleDelta;
 
             SilenceSliderLabel.Content = SilenceSlider.Value;
             SpeakingSliderLabel.Content = SpeakingSlider.Value;
@@ -79,7 +79,7 @@ namespace KarkatAnimation.OBS.Windows
                     break;
                 case "PeakDeltaSlider":
                     PeakDeltaSliderLabel.Content = e.NewValue;
-                    _settings.PeakDelta = (decimal)e.NewValue;
+                    _settings.SampleDelta = (decimal)e.NewValue;
                     break;
                 default:
                     break;

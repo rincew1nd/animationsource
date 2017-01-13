@@ -14,10 +14,25 @@ namespace KarkatAnimation.OBS.Windows
     /// </summary>
     public partial class ImagesSettings : Window
     {
+        /// <summary>
+        /// Settings object
+        /// </summary>
         private readonly SettingsObj _settings;
+
+        /// <summary>
+        /// Type for better navigation
+        /// </summary>
         private readonly Dictionary<string, int> _volumes;
+
+        /// <summary>
+        /// Temporary path to current selected animation frame
+        /// </summary>
         private string _tempPath;
 
+        /// <summary>
+        /// Load default values to form
+        /// Update form with settings values
+        /// </summary>
         public ImagesSettings()
         {
             InitializeComponent();
@@ -43,7 +58,7 @@ namespace KarkatAnimation.OBS.Windows
         }
 
         /// <summary>
-        /// Событие открытия окна
+        /// On form load
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -53,7 +68,8 @@ namespace KarkatAnimation.OBS.Windows
         }
 
         /// <summary>
-        /// Событие нажатия на кнопку добавления изображения
+        /// On add frame button pressed
+        /// Set form values for new frame
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -67,7 +83,9 @@ namespace KarkatAnimation.OBS.Windows
         }
 
         /// <summary>
-        /// Событие нажатия на кнопку удаления изображения
+        /// On delete frame button pressed
+        /// Delete frame from animation frame storage
+        /// Select first frame and load its values
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -92,6 +110,11 @@ namespace KarkatAnimation.OBS.Windows
             VolumeTypeList_SelectedIndexChanged(null, null);
         }
 
+        /// <summary>
+        /// Open frame image dialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpenImage_Click(object sender, EventArgs e)
         {
             var dialog = new OpenFileDialog();
@@ -102,7 +125,8 @@ namespace KarkatAnimation.OBS.Windows
         }
 
         /// <summary>
-        /// Событие нажатия на кнопку сохранения редактированного/нового изображения
+        /// On save button pressed
+        /// Save edited\new frame to animation frame storage
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -131,7 +155,7 @@ namespace KarkatAnimation.OBS.Windows
         }
 
         /// <summary>
-        /// Событие изменения выбранной картинки
+        /// On selected frame changed
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -141,7 +165,7 @@ namespace KarkatAnimation.OBS.Windows
         }
 
         /// <summary>
-        /// Обновление порядка и максимального значения порядка при смене типа
+        /// Load frame order by animation type
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -171,7 +195,7 @@ namespace KarkatAnimation.OBS.Windows
         }
 
         /// <summary>
-        /// Загрузка значений картинки в компоненты
+        /// Load frame image to preview
         /// </summary>
         /// <param name="image"></param>
         private void LoadImageInfo(AnimationImage image)
@@ -196,7 +220,7 @@ namespace KarkatAnimation.OBS.Windows
         }
 
         /// <summary>
-        /// Обновление списка картинок после изменения значений
+        /// Update frame list
         /// </summary>
         private void UpdateImageList()
         {
@@ -228,9 +252,9 @@ namespace KarkatAnimation.OBS.Windows
         }
 
         /// <summary>
-        /// Получить VolumeType из компонента
+        /// Get current selected frame 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>AnimationImage</returns>
         private AnimationImage GetSelectedImage()
         {
             var selectedItem = ImageList.SelectedItem as AnimationImage;
@@ -240,9 +264,9 @@ namespace KarkatAnimation.OBS.Windows
         }
 
         /// <summary>
-        /// Получить VolumeType из компонента
+        /// Get current selected VolumeType
         /// </summary>
-        /// <returns></returns>
+        /// <returns>VolumeType</returns>
         private VolumeType GetVolumeType()
         {
             var stringType = VolumeTypeList.SelectedItem as string;

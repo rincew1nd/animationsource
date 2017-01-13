@@ -95,7 +95,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)$(TargetFileName)" "C:\Program Files\OBS\plugins\CLRHostPlugin"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)KarkatAnimation.Audio.dll" "C:\Program Files\OBS\plugins\CLRHostPlugin"
+copy "$(TargetDir)KarkatAnimation.Manager.dll" "C:\Program Files\OBS\plugins\CLRHostPlugin"
+copy "$(TargetDir)KarkatAnimation.OBS.dll" "C:\Program Files\OBS\plugins\CLRHostPlugin"
+copy "$(TargetDir)KarkatAnimation.Settings.dll" "C:\Program Files\OBS\plugins\CLRHostPlugin"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

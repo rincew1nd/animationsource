@@ -5,12 +5,26 @@ using Newtonsoft.Json;
 
 namespace KarkatAnimation.Settings
 {
+    /// <summary>
+    /// Settings manager for loading\saving settings to external json file
+    /// </summary>
     public static class SettingsManager
     {
+        /// <summary>
+        /// Settings object
+        /// </summary>
         public static SettingsObj Settings;
+
+        /// <summary>
+        /// Settings json file location
+        /// </summary>
         private static readonly string ConfigLocation =
             AppDomain.CurrentDomain.BaseDirectory + "\\settings.json";
 
+        /// <summary>
+        /// Load or Create default settings json file
+        /// </summary>
+        /// <returns></returns>
         public static SettingsObj Load()
         {
             if (File.Exists(ConfigLocation))
@@ -29,7 +43,7 @@ namespace KarkatAnimation.Settings
                     Speaking = 0,
                     Shouting = 0,
                     UpdateTime = 500,
-                    PeakDelta = 1,
+                    SampleDelta = 1,
                     Images = null
                 };
                 Save();
@@ -37,6 +51,9 @@ namespace KarkatAnimation.Settings
             return Settings;
         }
 
+        /// <summary>
+        /// Save settings to json file
+        /// </summary>
         public static void Save()
         {
             var settingsJson = JsonConvert.SerializeObject(Settings);
