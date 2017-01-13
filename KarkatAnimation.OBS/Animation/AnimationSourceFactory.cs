@@ -1,4 +1,5 @@
-﻿using CLROBS;
+﻿using System;
+using CLROBS;
 using KarkatAnimation.Manager;
 using KarkatAnimation.Settings;
 using KarkatAnimation.OBS.Windows;
@@ -13,7 +14,7 @@ namespace KarkatAnimation.OBS.Animation
         {
             ClassName = "Animation Source";
             DisplayName = "Karkat Animation Source";
-
+            
             _animationManager = new AnimationManager();
             SettingsManager.Load();
         }

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using KarkatAnimation.Settings;
 using NAudio.Wave;
@@ -15,7 +16,7 @@ namespace KarkatAnimation.OBS.Windows
         public SettingsControl()
         {
             InitializeComponent();
-            
+
             _settings = SettingsManager.Settings;
 
             LoadInputAudioDevices();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Web.Script.Serialization;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace KarkatAnimation.Settings
 {
@@ -15,8 +15,8 @@ namespace KarkatAnimation.Settings
         {
             if (File.Exists(ConfigLocation))
             {
-                Settings = new JavaScriptSerializer()
-                    .Deserialize<SettingsObj>(
+                Settings = JsonConvert
+                    .DeserializeObject<SettingsObj>(
                         File.ReadAllText(ConfigLocation)
                     );
             }
@@ -39,7 +39,7 @@ namespace KarkatAnimation.Settings
 
         public static void Save()
         {
-            var settingsJson = new JavaScriptSerializer().Serialize(Settings);
+            var settingsJson = JsonConvert.SerializeObject(Settings);
             File.WriteAllText(ConfigLocation, settingsJson);
         }
     }

@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CLRHost.Interop, Version=1.0.5363.26812, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files\OBS\plugins\CLRHostPlugin\CLRHost.Interop.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,10 +57,6 @@
     <ProjectReference Include="..\KarkatAnimation.Settings\KarkatAnimation.Settings.csproj">
       <Project>{f9edb0ad-9c55-4ac9-821a-e27462fe4b5c}</Project>
       <Name>KarkatAnimation.Settings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KarkatAnimation.WebServer\KarkatAnimation.WebServer.csproj">
-      <Project>{e4fb6d4b-3002-4153-bcca-325db6e8e5d9}</Project>
-      <Name>KarkatAnimation.WebServer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

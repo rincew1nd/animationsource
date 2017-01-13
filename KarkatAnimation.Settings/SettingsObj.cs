@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace KarkatAnimation.Settings
 {
@@ -15,6 +15,6 @@ namespace KarkatAnimation.Settings
         public int UpdateTime;
         public decimal PeakDelta;
         //Images for animation
-        public List<AnimationImage> Images;
+        public Dictionary<VolumeType,List<AnimationImage>> Images;
     }
 }

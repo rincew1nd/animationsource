@@ -3,9 +3,9 @@ using KarkatAnimation.OBS.Animation;
 
 namespace KarkatAnimation.OBS
 {
-    class Plugin : AbstractPlugin
+    class KarkatPlugin : AbstractPlugin
     {
-        public Plugin()
+        public KarkatPlugin()
         {
             Name = "Karkat animation plugin";
             Description = "Plugin for visualizing animation based on microphone volume";
