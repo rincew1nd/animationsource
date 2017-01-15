@@ -1,5 +1,4 @@
-﻿using CLROBS;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace KarkatAnimation.Settings
 {
@@ -19,12 +18,6 @@ namespace KarkatAnimation.Settings
         /// Animation order in animation cycle
         /// </summary>
         public int Order;
-
-        /// <summary>
-        /// Image information for OBS
-        /// </summary>
-        [JsonIgnore]
-        public Texture Texture;
 
         /// <summary>
         /// №{Order} - {Type}

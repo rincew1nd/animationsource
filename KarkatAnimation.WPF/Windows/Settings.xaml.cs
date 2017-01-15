@@ -3,24 +3,28 @@ using System.Windows;
 using System.Windows.Controls;
 using KarkatAnimation.Settings;
 using NAudio.Wave;
+using TAlex.WPF.Controls;
 
-namespace KarkatAnimation.OBS.Windows
+namespace KarkatAnimation.WPF.Windows
 {
     /// <summary>
     /// Interaction logic for Settings.xaml
     /// </summary>
     public partial class SettingsControl : Window
     {
-        private SettingsObj _settings;
+        private readonly SettingsObj _settings;
+        private bool _isInit;
 
         public SettingsControl()
         {
+            _isInit = true;
+            _settings = SettingsManager.Load();
+
             InitializeComponent();
-
-            _settings = SettingsManager.Settings;
-
+            
             LoadInputAudioDevices();
             LoadOldValues();
+            _isInit = false;
         }
 
         private void LoadInputAudioDevices()
@@ -46,45 +50,36 @@ namespace KarkatAnimation.OBS.Windows
             ShoutingSlider.Value = _settings.Shouting;
             UpdateTimeSlider.Value = _settings.UpdateTime;
             PeakDeltaSlider.Value = (double)_settings.SampleDelta;
-
-            SilenceSliderLabel.Content = SilenceSlider.Value;
-            SpeakingSliderLabel.Content = SpeakingSlider.Value;
-            ShoutingSliderLabel.Content = ShoutingSlider.Value;
-            UpdateTimeSliderLabel.Content = UpdateTimeSlider.Value;
-            PeakDeltaSliderLabel.Content = PeakDeltaSlider.Value;
+            PortTextbox.Value = _settings.Port;
+            AudioHzTextbox.Value = _settings.AudioHz;
         }
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            if (_isInit) return;
             var slider = sender as Slider;
             if (slider == null) return;
 
             switch (slider.Name)
             {
                 case "SilenceSlider":
-                    SilenceSliderLabel.Content = (int)e.NewValue;
                     _settings.Silence = (int) e.NewValue;
                     break;
                 case "SpeakingSlider":
-                    SpeakingSliderLabel.Content = (int)e.NewValue;
                     _settings.Speaking = (int)e.NewValue;
                     break;
                 case "ShoutingSlider":
-                    ShoutingSliderLabel.Content = (int)e.NewValue;
                     _settings.Shouting = (int)e.NewValue;
                     break;
                 case "UpdateTimeSlider":
-                    UpdateTimeSliderLabel.Content = (int)e.NewValue;
                     _settings.UpdateTime = (int)e.NewValue;
                     break;
                 case "PeakDeltaSlider":
-                    PeakDeltaSliderLabel.Content = e.NewValue;
                     _settings.SampleDelta = (decimal)e.NewValue;
                     break;
                 default:
                     break;
             }
-            
         }
 
         private void ImageSettingsButton_Click(object sender, RoutedEventArgs e)
@@ -95,6 +90,9 @@ namespace KarkatAnimation.OBS.Windows
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            _settings.Port = (int)PortTextbox.Value;
+            _settings.AudioHz = (int)AudioHzTextbox.Value;
+
             SettingsManager.Save();
             DialogResult = true;
             this.Close();

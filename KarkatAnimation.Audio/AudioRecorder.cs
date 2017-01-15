@@ -39,7 +39,7 @@ namespace KarkatAnimation.Audio
         public AudioRecorder()
         {
             _sampleAggregator = new SampleAggregator();
-            RecordingFormat = new WaveFormat(44100, 1);
+            RecordingFormat = new WaveFormat(10000, 1);
             IsMonitoring = false;
         }
 

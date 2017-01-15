@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26020.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarkatAnimation.OBS", "KarkatAnimation.OBS\KarkatAnimation.OBS.csproj", "{D7D0A9C8-9A75-448C-B785-4936F33E1662}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarkatAnimation.Manager", "KarkatAnimation.Manager\KarkatAnimation.Manager.csproj", "{F1A139FD-97F0-4775-BFC8-9FFEBF04FF79}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarkatAnimation.Audio", "KarkatAnimation.Audio\KarkatAnimation.Audio.csproj", "{7A7B9634-FC90-41C0-AAB1-92D4766AF8FF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarkatAnimation.Settings", "KarkatAnimation.Settings\KarkatAnimation.Settings.csproj", "{F9EDB0AD-9C55-4AC9-821A-E27462FE4B5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarkatAnimation.WPF", "KarkatAnimation.WPF\KarkatAnimation.WPF.csproj", "{21AC58B9-373F-40E7-A856-F8AC3F311805}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KarkatAnimation.WebServer", "KarkatAnimation.WebServer\KarkatAnimation.WebServer.csproj", "{E4FB6D4B-3002-4153-BCCA-325DB6E8E5D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D7D0A9C8-9A75-448C-B785-4936F33E1662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7D0A9C8-9A75-448C-B785-4936F33E1662}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7D0A9C8-9A75-448C-B785-4936F33E1662}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7D0A9C8-9A75-448C-B785-4936F33E1662}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1A139FD-97F0-4775-BFC8-9FFEBF04FF79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1A139FD-97F0-4775-BFC8-9FFEBF04FF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1A139FD-97F0-4775-BFC8-9FFEBF04FF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +31,14 @@ Global
 		{F9EDB0AD-9C55-4AC9-821A-E27462FE4B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9EDB0AD-9C55-4AC9-821A-E27462FE4B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9EDB0AD-9C55-4AC9-821A-E27462FE4B5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21AC58B9-373F-40E7-A856-F8AC3F311805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21AC58B9-373F-40E7-A856-F8AC3F311805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21AC58B9-373F-40E7-A856-F8AC3F311805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21AC58B9-373F-40E7-A856-F8AC3F311805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4FB6D4B-3002-4153-BCCA-325DB6E8E5D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4FB6D4B-3002-4153-BCCA-325DB6E8E5D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4FB6D4B-3002-4153-BCCA-325DB6E8E5D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4FB6D4B-3002-4153-BCCA-325DB6E8E5D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

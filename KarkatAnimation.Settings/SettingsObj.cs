@@ -38,9 +38,18 @@ namespace KarkatAnimation.Settings
         /// </summary>
         public decimal SampleDelta;
 
+        public int Port;
+
+        public int AudioHz;
+
         /// <summary>
         /// Animation frames store
         /// </summary>
         public Dictionary<VolumeType,List<AnimationImage>> Images;
+
+        /// <summary>
+        /// Current animation state
+        /// </summary>
+        public KeyValuePair<VolumeType, int> AnimationState;
     }
 }

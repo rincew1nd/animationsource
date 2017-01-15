@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Karkat Animation Page</title>
+    <script>
+        function updateImage() {
+            document.getElementById("picture").src = "http://localhost:{port}/karkat/image.jpg";
+            setTimeout(updateImage, {updateTime});
+        }
+    </script>
+    <style>
+        body {
+            background-color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <img id="picture" />
+    <script>updateImage()</script>
+</body>
+</html>

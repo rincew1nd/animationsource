@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 using KarkatAnimation.Settings;
 using Microsoft.Win32;
 
-namespace KarkatAnimation.OBS.Windows
+namespace KarkatAnimation.WPF.Windows
 {
     /// <summary>
     /// Interaction logic for ImagesSettings.xaml
@@ -40,7 +40,7 @@ namespace KarkatAnimation.OBS.Windows
             _settings = SettingsManager.Settings;
             ImageList.IsEnabled = VolumeTypeList.IsEnabled = Order.IsEnabled = SaveImageInfoButton.IsEnabled = false;
 
-            if (_settings.Images == null)
+            if (_settings.Images == null || _settings.Images.Count < 3)
                 _settings.Images = new Dictionary<VolumeType, List<AnimationImage>>()
                 {
                     {VolumeType.Silence, new List<AnimationImage>()},
@@ -50,7 +50,9 @@ namespace KarkatAnimation.OBS.Windows
 
             _volumes = new Dictionary<string, int>()
             {
-                { "Silence", 0 }, { "Speaking", 1 }, { "Shouting", 2 }
+                {"Silence", 0},
+                {"Speaking", 1},
+                {"Shouting", 2}
             };
             foreach (var volumesKey in _volumes.Keys)
                 VolumeTypeList.Items.Add(volumesKey);
@@ -62,7 +64,7 @@ namespace KarkatAnimation.OBS.Windows
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddImages_Load(object sender, RoutedEventArgs e)
+        private void ImagesSettings_Load(object sender, RoutedEventArgs e)
         {
             UpdateImageList();
         }
@@ -75,7 +77,7 @@ namespace KarkatAnimation.OBS.Windows
         /// <param name="e"></param>
         private void AddImageButton_Click(object sender, EventArgs e)
         {
-            VolumeTypeList.IsEnabled = Order.IsEnabled = 
+            VolumeTypeList.IsEnabled = Order.IsEnabled =
                 SaveImageInfoButton.IsEnabled = OpenImageButton.IsEnabled = true;
 
             ImageList.SelectedIndex = -1;
@@ -136,7 +138,7 @@ namespace KarkatAnimation.OBS.Windows
             var animationImage = new AnimationImage
             {
                 Type = GetVolumeType(),
-                Order = (int)Order.Value,
+                Order = (int) Order.Value,
                 Path = _tempPath
             };
 
@@ -145,8 +147,8 @@ namespace KarkatAnimation.OBS.Windows
             _settings.Images[animationImage.Type].Insert(animationImage.Order, animationImage);
 
             if (originalImage != null)
-            for (var i = 0; i < _settings.Images[originalImage.Type].Count; i++)
-                _settings.Images[originalImage.Type][i].Order = i;
+                for (var i = 0; i < _settings.Images[originalImage.Type].Count; i++)
+                    _settings.Images[originalImage.Type][i].Order = i;
             for (var i = 0; i < _settings.Images[animationImage.Type].Count; i++)
                 _settings.Images[animationImage.Type][i].Order = i;
 
@@ -174,7 +176,7 @@ namespace KarkatAnimation.OBS.Windows
             var image = GetSelectedImage();
             var type = GetVolumeType();
             //Нет элементов = -1, Есть элементы = максимальный порядок.
-            var maximum = _settings.Images.ContainsKey(type) ? _settings.Images[type].Count-1 : -1;
+            var maximum = _settings.Images.ContainsKey(type) ? _settings.Images[type].Count - 1 : -1;
 
             if (maximum != -1)
             {
@@ -183,8 +185,9 @@ namespace KarkatAnimation.OBS.Windows
 
                 Order.IsEnabled = true;
                 Order.Maximum = maximum;
-                Order.Value = (image == null || image.Type != type) ?
-                    maximum : image.Order;
+                Order.Value = (image == null || image.Type != type)
+                    ? maximum
+                    : image.Order;
             }
             else
             {
@@ -212,10 +215,16 @@ namespace KarkatAnimation.OBS.Windows
             else
             {
                 VolumeTypeList.SelectedIndex = _volumes[image.Type.ToString()];
-                Order.Maximum = _settings.Images[image.Type].Count-1;
+                Order.Maximum = _settings.Images[image.Type].Count - 1;
                 Order.Value = image.Order;
                 _tempPath = image.Path;
-                ImagePreview.Source = new BitmapImage(new Uri(image.Path));
+                
+                var bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(image.Path);
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.EndInit();
+                ImagePreview.Source = bitmap;
             }
         }
 
@@ -272,7 +281,12 @@ namespace KarkatAnimation.OBS.Windows
             var stringType = VolumeTypeList.SelectedItem as string;
             if (stringType == null)
                 throw new ArgumentException("Неверный тип VolumeType!");
-            return (VolumeType)_volumes[stringType];
+            return (VolumeType) _volumes[stringType];
+        }
+
+        private void ImagesSettings_OnClosed(object sender, EventArgs e)
+        {
+            ImagePreview.Source = null;
         }
     }
 }

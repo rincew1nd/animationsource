@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using Newtonsoft.Json;
@@ -44,7 +45,7 @@ namespace KarkatAnimation.Settings
                     Shouting = 0,
                     UpdateTime = 500,
                     SampleDelta = 1,
-                    Images = null
+                    Images = new Dictionary<VolumeType, List<AnimationImage>>()
                 };
                 Save();
             }

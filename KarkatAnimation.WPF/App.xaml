@@ -1,0 +1,8 @@
+﻿<Application x:Class="KarkatAnimation.WPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="Windows/MainView.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

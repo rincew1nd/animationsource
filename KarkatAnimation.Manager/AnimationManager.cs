@@ -4,6 +4,8 @@ using System.Timers;
 using KarkatAnimation.Audio;
 using KarkatAnimation.Settings;
 using Timer = System.Timers.Timer;
+using System.Windows.Controls;
+using NAudio.Wave;
 
 namespace KarkatAnimation.Manager
 {
@@ -28,11 +30,6 @@ namespace KarkatAnimation.Manager
         private readonly Timer _pictureUpdateTimer;
 
         /// <summary>
-        /// Current animation state
-        /// </summary>
-        public KeyValuePair<VolumeType, int> AnimationState;
-
-        /// <summary>
         /// Current animation maximal frame count
         /// </summary>
         private int _currentPictureCount;
@@ -43,9 +40,14 @@ namespace KarkatAnimation.Manager
         private decimal _voiceVolume;
 
         /// <summary>
+        /// Set curent sample volume value to CurrentSampleVolume progressbar on MainView
+        /// </summary>
+        private readonly ProgressBar _currentSampleVolume;
+
+        /// <summary>
         /// Init settings, audio recorder, animation update time
         /// </summary>
-        public AnimationManager()
+        public AnimationManager(ProgressBar currentSampleVolume)
         {
             _settings = SettingsManager.Load();
 
@@ -54,6 +56,8 @@ namespace KarkatAnimation.Manager
 
             _pictureUpdateTimer = new Timer();
             _pictureUpdateTimer.Elapsed += UpdateImage;
+
+            _currentSampleVolume = currentSampleVolume;
         }
 
         /// <summary>
@@ -61,7 +65,8 @@ namespace KarkatAnimation.Manager
         /// </summary>
         public void StartMonitoring()
         {
-            AnimationState = new KeyValuePair<VolumeType, int>(VolumeType.Stopped, 0);
+            _settings.AnimationState = new KeyValuePair<VolumeType, int>(VolumeType.Stopped, 0);
+            _recorder.RecordingFormat = new WaveFormat(_settings.AudioHz, 1);
             _recorder.BeginMonitoring(_settings.LastUsedDevice);
             _pictureUpdateTimer.Interval = _settings.UpdateTime;
             _pictureUpdateTimer.Start();
@@ -93,6 +98,13 @@ namespace KarkatAnimation.Manager
             else if (_voiceVolume > 0)
                 _voiceVolume = _voiceVolume > _settings.SampleDelta ?
                     _voiceVolume - _settings.SampleDelta : 0;
+
+            Console.WriteLine(_voiceVolume);
+
+            _currentSampleVolume.Dispatcher.BeginInvoke(new Action(delegate ()
+            {
+                _currentSampleVolume.Value = (double)_voiceVolume;
+            }));
         }
 
         /// <summary>
@@ -102,24 +114,23 @@ namespace KarkatAnimation.Manager
         /// <param name="e"></param>
         private void UpdateImage(object s, ElapsedEventArgs e)
         {
-            CLROBS.API.Instance.Log($"Voice volume - {_voiceVolume}");
-
             VolumeType type = _voiceVolume <= _settings.Silence ?
                 VolumeType.Silence : _voiceVolume <= _settings.Speaking ?
                     VolumeType.Speaking : _voiceVolume <= _settings.Shouting ? 
                         VolumeType.Shouting : VolumeType.Stopped;
 
-            if (AnimationState.Key != type)
+            if (_settings.AnimationState.Key != type)
             {
-                AnimationState = new KeyValuePair<VolumeType, int>(type, 0);
-                _currentPictureCount = _settings.Images[type].Count-1;
+                _settings.AnimationState = new KeyValuePair<VolumeType, int>(type, 0);
+                _currentPictureCount = _settings.Images.ContainsKey(type) ?
+                    _settings.Images[type].Count-1 : 0;
             }
             else
             {
-                AnimationState = new KeyValuePair<VolumeType, int>(
+                _settings.AnimationState = new KeyValuePair<VolumeType, int>(
                     type,
-                    (AnimationState.Value == _currentPictureCount) ?
-                        0 : AnimationState.Value + 1
+                    (_settings.AnimationState.Value == _currentPictureCount) ?
+                        0 : _settings.AnimationState.Value + 1
                 );
             }
         }
